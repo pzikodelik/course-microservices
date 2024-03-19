@@ -4,6 +4,7 @@ import brave.Tracer;
 import com.ironbrain.users.microservice.dao.UserResponse;
 import com.ironbrain.users.microservice.service.UserService;
 import com.ironbrain.users.microservice.service.impl.UserServiceImpl;
+import io.micrometer.core.annotation.Timed;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -25,6 +26,7 @@ public class UsersController {
 
     private final Tracer tracer;
 
+    @Timed(value = "users.get.user")
     @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponse> getUser() {
 

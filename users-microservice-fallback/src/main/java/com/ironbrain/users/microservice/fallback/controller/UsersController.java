@@ -2,6 +2,7 @@ package com.ironbrain.users.microservice.fallback.controller;
 
 import brave.Tracer;
 import com.ironbrain.users.microservice.fallback.dao.UserResponse;
+import io.micrometer.core.annotation.Timed;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -24,6 +25,7 @@ public class UsersController {
 
     private final Tracer tracer;
 
+    @Timed(value = "users.fallback.get.user")
     @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponse> getUser() {
 
